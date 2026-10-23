@@ -1,1 +1,3 @@
 model,job,trial,outcome,reward,in_regime,across_boundary,cost_usd,failure_class,note
+gpt-6-astra (max),smoke,task__jnT3ZH3,scored,0.896,1.000,0.791,3.27,construct,"Mapped chains via the file's own _struct_ref_seq; 5n2r labels A2A 219-233 against the entry itself (not P29274), so Astra dropped them -> A2A core -10. beta2AR core +5 vs key = SIFTS end ambiguity (reference agrees with Astra)."
+hy4-preview,smoke,task__4DV6ucB,timeout,,,,2.02,,"No /app/answers.csv after 3600 s; reproduced the worked example and found the right beta2AR copy count, then spent the rest re-validating its mapping (~80 steps). Non-scored."
