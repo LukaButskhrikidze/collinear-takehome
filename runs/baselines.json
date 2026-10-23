@@ -1,0 +1,18 @@
+{
+  "status": "pilot, provisional truth, 2026-10-23",
+  "null": {
+    "reward": 0.2005,
+    "across_boundary": 0.0,
+    "in_regime": 0.401
+  },
+  "naive": {
+    "reward": 0.5,
+    "across_boundary": 0.0,
+    "in_regime": 1.0
+  },
+  "reference": {
+    "reward": 0.981,
+    "across_boundary": 0.9621,
+    "in_regime": 1.0
+  }
+}

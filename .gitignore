@@ -1,0 +1,23 @@
+# local tooling
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Ground truth and anything that reveals it: never pushed (brief: held-out answers stay private).
+# They ship only inside the final zip (task/tests/), as the brief's layout requires.
+task/tests/truth.csv
+gen/pipeline_keys_*.tsv
+gen/data_card.csv
+# Harbor job folders: verifier/metrics.json holds true values; agent logs may hold secrets
+runs/*/
+!runs/no_tools/
+
+# Input structures: public PDB files, re-fetched with gen/fetch_from_pipeline.sh
+task/environment/data/proteins/
+task/environment/data/examples/*/structures/
+
+# local-only notes with answer values
+*_private.md
+# my pipeline pipeline notes: list per-protein member counts (answer values) -> local only
+pipeline_README.md

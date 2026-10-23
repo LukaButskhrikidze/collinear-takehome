@@ -1,0 +1,49 @@
+# Every parameter the task depends on. Frozen by git commit before the first model run.
+task: experimental-ensemble-size-and-core
+frozen: null            # commit hash + date once frozen
+status: PILOT — truth from my pipeline's current code (2026-10-23); item set not final
+
+pinned:                 # each has a `name = value unit` line in instruction.md
+  model: {value: 1, unit: first model of each entry}
+  altloc: {value: first, unit: first listed alternate location}
+  copy_overlap: {value: 10, unit: residues}
+  min_fraction: {value: 0.80, unit: fraction of longest member}
+  fit_cutoff: {value: 2.0, unit: Å}
+  fit_cycles: {value: 5, unit: cycles}
+  fit_fallback: {value: 8.0, unit: Å}
+  reference: shortest member after min_fraction
+  core: UniProt positions with a Cα in every member of the final ensemble
+  numbering: UniProt position
+  snapshot: 2026-08-30 (SIFTS 2026/08/30, PDB 35.26, UniProt 2026.03)
+
+free:                   # the biology being tested — not stated in the instruction
+  protein_only: which residues are protein (modified amino acids such as MSE count; ligands, ions, water, sugars, nucleic acids, UNK do not)
+  identity: which chain segments are this UniProt protein — expression tags, linkers, fusion partners (T4 lysozyme, BRIL), binding partners (G proteins, nanobodies, antibodies) are not
+  numbering: mapping deposited residues to UniProt positions (author numbering is not UniProt numbering)
+  mutants: point mutants and thermostabilised variants are the same protein
+  ligands: ligand-bound structures count
+
+metric:
+  number_reward: clip(1 - |pred - truth| / max(|naive - truth|, 0.05 * truth, 1), 0, 1)
+  protein_reward: mean of number_reward(n_members) and number_reward(n_core)
+  aggregate: mean over held-out proteins; also reported per subset
+  missing_or_malformed: 0 for that protein (or all, if the file is unusable), never dropped
+
+baselines:              # task/baseline/
+  null: n_members = number of entries, n_core = UniProt length
+  naive (cheap tool): pinned rules on chains as deposited — author numbering, nothing trimmed
+  reference: task/solution/reference.py (sequence alignment to UniProt with gemmi, no SIFTS)
+
+truth:
+  source: my pipeline — SIFTS mapping, numbering audit, same pinned rules
+  core_definition: aligned members only (README and code agree)
+  how: gen/pipeline_recompute.py runs her current code in memory; some on-disk sidecars are stale
+    (older code, fingerprint skip), e.g. P07550 and P16304
+  cross_check: reference.py must agree; disagreements are investigated per protein
+
+items:
+  worked_examples: [P69441]
+  in_regime: [O66490, P43408]          # pilot
+  across_boundary: [P07550, P29274]    # pilot
+  mechanism: crystallisation constructs carry non-native parts (fusion proteins inside loops,
+    tags, partners) and non-UniProt numbering; the ensemble only works after stripping them
