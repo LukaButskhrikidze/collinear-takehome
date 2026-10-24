@@ -1,0 +1,22 @@
+# harbor run -c jobs/main.yaml   (Hy4 only, 3 attempts)
+job_name: hy4_active
+jobs_dir: runs
+n_attempts: 3
+# colima VM has 4 CPUs / 8 GB; each trial needs 3 CPUs / 6 GB -> one trial at a time
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+environment:
+  type: docker
+  force_build: false
+  delete: true
+agents:
+  - name: opencode
+    model_name: "openrouter/tencent/hy4-preview"
+    override_setup_timeout_sec: 900
+    kwargs:
+      version: "1.18.31"
+      opencode_config:
+        small_model: "openrouter/tencent/hy4-preview"
+tasks:
+  - path: task_active

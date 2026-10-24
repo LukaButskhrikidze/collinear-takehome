@@ -1,0 +1,44 @@
+# Every parameter the task depends on. Frozen by the git commit that adds this file, before any
+# model run on this task. The answer key itself stays private; its SHA-256 is recorded here.
+task: active-receptor-states
+frozen: "see git log (commit adding task_active/spec.yaml)"
+
+question: for every PDB entry, is the receptor in its active (G-protein-coupling) conformation (1) or not (0)?
+
+pinned:                 # each has a `name = value unit` line in instruction.md
+  model: {value: 1, unit: first model of each entry}
+  copy_rule: {value: majority, unit: of receptor copies in the entry decides its label}
+  classes: {value: 2, unit: active (1) versus not active (0 = inactive or intermediate)}
+  snapshot: 2026-08-30 (PDB 35.26, UniProt 2026.03; files from the my pipeline's raw store)
+
+free:                   # the biology being tested, not stated in the instruction
+  what_active_means: a structural state (TM6 swung away from TM3 to open the G-protein site), not "a G protein is bound" or "an agonist is bound"
+  landmarks: locating TM3 (DRY motif, 3.50) and TM6 (CWxP family variants, 6.50 → 6.34) in each receptor without GPCRdb
+  constructs: mapping deposited chains (fusions, tags, partners, author numbering) back to the receptor
+  partners: nanobody-stabilised and agonist-only structures can be active; partner presence is not the criterion
+
+metric:
+  per_receptor: clip(1 - errors / baseline_error, 0, 1); errors = wrong or missing labels
+  baseline_error: errors of the best label-free shortcut on that receptor, floored at 1
+  shortcuts: [gprotein (file-based), gprotein_curated (GPCRdb partner field), all_active, all_inactive]
+  aggregate: mean over held-out receptors; reported per subset
+
+key:
+  label: GPCRdb state (Active vs Inactive/Intermediate) AND Cα(3.50)–Cα(6.34) distance from the
+    my pipeline's aligned ensemble agree, with a margin: active needs >= 10.5 Å, not-active < 8.7 Å;
+    entries in between, without a GPCRdb label, or where the two disagree are not shipped
+  anchor: distance rule vs GPCRdb on 737 ensemble members: 98.5% agreement at 9.0 Å
+  landmark_rule_vs_gpcrdb: sequence-motif landmarks match GPCRdb numbering on 17/18 receptors (miss = PGD2 receptor, excluded)
+  reference: task_active/solution/reference_active.py scores 1.0 (all 371 structures)
+  truth_sha256: ea8df0393a172a414e7a526330791efc409d77c088da5e1b51fb0275bdc26031
+  receptors_sha256: f26d0e5c132bb73f6a5b6c52dea055242bc5632e3e5cedfd13c8d16049891e29
+
+items:
+  selection_rule: class A receptors with an ensemble from my pipeline containing 3.50 and 6.34 in its core;
+    in_regime = the curated G-protein shortcut makes 0 errors; across_boundary = every shortcut
+    makes >= 2 errors (active structures without a G protein exist)
+  worked_example: [O43614]
+  in_regime: [P30874, P21730, P28223]
+  across_boundary: [P07550, P02699, P07700, P21554, P30556, P35372, P42866, Q16581]
+  mechanism: the active state is a conformation that can exist without a G protein (nanobody-stabilised,
+    agonist-only, opsin/Meta-II); recognising it requires measuring TM6 opening, not reading partners

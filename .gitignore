@@ -21,3 +21,12 @@ task/environment/data/examples/*/structures/
 *_private.md
 # my pipeline pipeline notes: list per-protein member counts (answer values) -> local only
 pipeline_README.md
+# candidate inputs (public PDB files)
+gen/candidates/
+# GPCRdb downloads (contain state labels for held-out items)
+gen/gpcrdb/
+# active-state task: answer key and inputs stay local (ship only in the final zip)
+task_active/tests/truth.csv
+task_active/tests/receptors.csv
+task_active/environment/data/proteins/
+task_active/environment/data/examples/*/structures/

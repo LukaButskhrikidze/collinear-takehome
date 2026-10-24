@@ -1,0 +1,38 @@
+schema_version = "1.1"
+
+[task]
+name = "butskhl/active-receptor-states"
+description = "Decide which PDB entries show each GPCR in its active, G-protein-competent conformation."
+authors = []
+keywords = ["protein-structure", "gpcr", "conformational-state"]
+
+[metadata]
+author_name = "Luka Butskhrikidze"
+author_email = "luka.butskhrikidze@vanderbilt.edu"
+difficulty = "hard"
+category = "structural-biology"
+tags = ["protein-structure", "pdb", "uniprot"]
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 3600.0
+# Agent phase only: model API reachable, nothing else (no RCSB/SIFTS/UniProt lookups).
+# Setup (opencode install) runs before this switch, on the public baseline below.
+network_mode = "allowlist"
+allowed_hosts = ["openrouter.ai", "models.dev"]
+
+[environment]
+build_timeout_sec = 1200.0
+cpus = 3
+memory_mb = 6144
+storage_mb = 10240
+gpus = 0
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]
