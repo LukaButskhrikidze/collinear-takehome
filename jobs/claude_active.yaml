@@ -1,0 +1,24 @@
+# Claude Code on the frozen active-state task, via subscription OAuth token (no API key).
+#   CLAUDE_FORCE_OAUTH=1 CLAUDE_CODE_OAUTH_TOKEN=$(cat ~/.config/collinear/claude_token) \
+#     .venv/bin/harbor run -c jobs/claude_active.yaml
+# Web tools are disabled: Claude's web search runs server-side, past the container firewall,
+# and GPCRdb's state labels are online.
+job_name: claude_active
+jobs_dir: runs
+n_attempts: 3
+# colima VM has 4 CPUs / 8 GB; each trial needs 3 CPUs / 6 GB -> one trial at a time
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+environment:
+  type: docker
+  force_build: false
+  delete: true
+agents:
+  - name: claude-code
+    model_name: anthropic/claude-opus-5-5
+    override_setup_timeout_sec: 900
+    kwargs:
+      disallowed_tools: "WebSearch,WebFetch"
+tasks:
+  - path: task_active

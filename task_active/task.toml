@@ -21,7 +21,7 @@ timeout_sec = 3600.0
 # Agent phase only: model API reachable, nothing else (no RCSB/SIFTS/UniProt lookups).
 # Setup (opencode install) runs before this switch, on the public baseline below.
 network_mode = "allowlist"
-allowed_hosts = ["openrouter.ai", "models.dev"]
+allowed_hosts = ["openrouter.ai", "models.dev", "api.anthropic.com"]
 
 [environment]
 build_timeout_sec = 1200.0
@@ -34,5 +34,8 @@ mcp_servers = []
 [verifier.env]
 
 [environment.env]
+# Claude Code: no telemetry, auto-update or other non-essential calls (only the model API is reachable)
+CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
+DISABLE_AUTOUPDATER = "1"
 
 [solution.env]
