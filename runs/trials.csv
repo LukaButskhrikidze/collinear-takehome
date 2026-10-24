@@ -4,3 +4,5 @@ hy4-preview,smoke,task__4DV6ucB,timeout,,,,2.02,,"No /app/answers.csv after 3600
 hy4-preview,hy4_active,task_active__K6SnT7o,provider_error,,,,0.00,,"OpenRouter 401 'API key expired' on the first request; no model output. Not scored."
 hy4-preview,hy4_active,task_active__Lof555R,provider_error,,,,0.00,,"OpenRouter 401 'API key expired' on the first request; no model output. Not scored."
 hy4-preview,hy4_active,task_active__zZTXv4T,provider_error,,,,0.00,,"OpenRouter 401 'API key expired' on the first request; no model output. Not scored."
+claude-opus-5.5 (supplementary; not a brief model),claude_active,task_active__mpDRiQy,scored,1.000,1.000,1.000,0.00 (subscription),,"All 371 labels right in 2m47s; measured TM6 opening from motif-located 3.50/6.34 and explicitly flagged nanobody/Meta-II actives and partner-bound inactives. No web search (tools off)."
+claude-opus-5.5 (supplementary; not a brief model),claude_active,task_active__Z9U57oM,cancelled,,,,0.00,,"Stopped by us after trial 1 (user request); agent never ran."
