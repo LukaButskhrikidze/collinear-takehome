@@ -1,7 +1,7 @@
 # Every parameter the task depends on. Frozen by git commit before the first model run.
 task: experimental-ensemble-size-and-core
 frozen: null            # commit hash + date once frozen
-status: PILOT — truth from my pipeline's current code (2026-10-23); item set not final
+status: V2 (2026-10-25) — 11 held-out proteins, 120 entries (pilot had 4 proteins, 335 entries; Hy4 timed out)
 
 pinned:                 # each has a `name = value unit` line in instruction.md
   model: {value: 1, unit: first model of each entry}
@@ -29,21 +29,32 @@ metric:
   aggregate: mean over held-out proteins; also reported per subset
   missing_or_malformed: 0 for that protein (or all, if the file is unusable), never dropped
 
-baselines:              # task/baseline/
-  null: n_members = number of entries, n_core = UniProt length
-  naive (cheap tool): pinned rules on chains as deposited — author numbering, nothing trimmed
-  reference: task/solution/reference.py (sequence alignment to UniProt with gemmi, no SIFTS)
+baselines:              # task/baseline/ ; rewards measured 2026-10-25 before any model run (all / in / across)
+  null: n_members = number of entries, n_core = UniProt length                          # 0.155 / 0.200 / 0.128
+  naive (cheap tool): pinned rules on chains as deposited — author numbering, nothing trimmed   # 0.477 / 1.000 / 0.178
+  depositor: trust each entry's own _struct_ref_seq mapping to this accession (what Astra did   # 0.712 / 1.000 / 0.548
+    with 5n2r in the pilot smoke run)
+  reference: task/solution/reference.py (sequence alignment to UniProt with gemmi, no SIFTS)    # 1.000 / 1.000 / 1.000
 
 truth:
   source: my pipeline — SIFTS mapping, numbering audit, same pinned rules
   core_definition: aligned members only (README and code agree)
-  how: gen/pipeline_recompute.py runs her current code in memory; some on-disk sidecars are stale
-    (older code, fingerprint skip), e.g. P07550 and P16304
-  cross_check: reference.py must agree; disagreements are investigated per protein
+  how: gen/subset/pipeline_subset.py runs her current code in memory on exactly the shipped entries
+    (on-disk sidecars can be stale: older code, fingerprint skip)
+  cross_check: reference.py equals the key on all 11 proteins (members and core)
+  entry_selection: only "clean" entries ship — my pipeline's per-copy UniProt residue sets (SIFTS + numbering audit)
+    equal the reference's copy for copy (gen/subset/compare.py), so no key hinges on a mapping judgement call;
+    receptors subsampled to 24 (A2a: all 4 clean traps; beta2AR: 10 traps) with seed 1; other proteins ship
+    all their clean entries
 
 items:
   worked_examples: [P69441]
-  in_regime: [O66490, P43408]          # pilot
-  across_boundary: [P07550, P29274]    # pilot
-  mechanism: crystallisation constructs carry non-native parts (fusion proteins inside loops,
-    tags, partners) and non-UniProt numbering; the ensemble only works after stripping them
+  in_regime: [O66490, P43408, P38247, P95339]    # author numbering = UniProt, no fusions: naive and depositor both exact
+  across_boundary: [P29274, P07550, P51159, O95150, P12355, Q96PD4, O28604]
+    # GPCR fusions (T4L/BRIL) and incomplete depositor mappings (5n2r, 5olo); Slp2-Rab27A fusion with negative
+    # numbering; TL1A soluble-domain constructs; PsaF numbered as the mature protein after its 77-residue
+    # chloroplast transit peptide; IL-17F numbered after its 30-residue signal peptide; AprB block numbering
+  mechanism: deposited constructs carry non-native parts and non-UniProt numbering (cleaved signal/transit
+    peptides, domain constructs numbered from 1, fusion and block numbering), and the entry's own mapping can be
+    incomplete; positions must be placed on UniProt by sequence. Defeats naive (0.18) and depositor (0.55)
+  dropped: P10372, P04303, P12504, A0QY90 (only the depositor mapping fails, naive is exact: fit neither subset)

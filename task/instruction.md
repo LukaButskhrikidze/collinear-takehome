@@ -1,20 +1,27 @@
 # Experimental conformational ensembles
 
 For each protein below, `/app/data/proteins/<protein_id>/` holds its UniProt
-sequence (`uniprot.fasta`) and every PDB entry that contains it
+sequence (`uniprot.fasta`) and a set of PDB entries that contain it
 (`structures/<pdb_id>.cif.gz`, snapshot 2026-08-30). Use only these files; the
 container has no internet access.
 
 | protein_id | Protein | Organism | PDB entries |
 |---|---|---|---|
+| O28604 | Adenylylsulfate reductase, subunit B | Archaeoglobus fulgidus | 6 |
 | O66490 | Adenylate kinase | Aquifex aeolicus | 14 |
+| O95150 | Tumor necrosis factor ligand superfamily member 15 | Homo sapiens | 7 |
+| P07550 | Beta-2 adrenergic receptor | Homo sapiens | 23 |
+| P12355 | Photosystem I reaction center subunit III, chloroplastic | Spinacia oleracea | 8 |
+| P29274 | Adenosine receptor A2a | Homo sapiens | 24 |
+| P38247 | Protein SLM4 | Saccharomyces cerevisiae | 6 |
 | P43408 | Adenylate kinase | Methanotorris igneus | 3 |
-| P07550 | Beta-2 adrenergic receptor | Homo sapiens | 130 |
-| P29274 | Adenosine receptor A2a | Homo sapiens | 188 |
+| P51159 | Ras-related protein Rab-27A | Homo sapiens | 9 |
+| P95339 | Cytochrome c-552 | Nitrosomonas europaea | 6 |
+| Q96PD4 | Interleukin-17F | Homo sapiens | 8 |
 
 **Question, for each protein:** build the protein's experimental monomer
-ensemble — every copy of the protein found in these entries, superposed onto one
-reference — and report
+ensemble from these entries — every copy of the protein found in them, superposed
+onto one reference — and report
 
 - `n_members`: how many structures (protein copies) the ensemble contains;
 - `n_core`: how many UniProt residue positions are present in every member.
@@ -59,7 +66,7 @@ Write `/app/answers.csv`, one row per protein:
 
 ```
 protein_id,n_members,n_core
-O66490,...,...
+O28604,...,...
 ```
 
 Both values are whole numbers. Extra columns are ignored.

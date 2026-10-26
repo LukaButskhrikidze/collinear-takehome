@@ -1,18 +1,23 @@
 {
-  "status": "pilot, provisional truth, 2026-10-23",
+  "status": "v2 item set, 2026-10-25, before any model run",
   "null": {
-    "reward": 0.2005,
-    "across_boundary": 0.0,
-    "in_regime": 0.401
+    "reward": 0.1547,
+    "across_boundary": 0.1285,
+    "in_regime": 0.2005
   },
   "naive": {
-    "reward": 0.5,
-    "across_boundary": 0.0,
+    "reward": 0.4771,
+    "across_boundary": 0.1784,
+    "in_regime": 1.0
+  },
+  "depositor": {
+    "reward": 0.7122,
+    "across_boundary": 0.5478,
     "in_regime": 1.0
   },
   "reference": {
-    "reward": 0.981,
-    "across_boundary": 0.9621,
+    "reward": 1.0,
+    "across_boundary": 1.0,
     "in_regime": 1.0
   }
 }

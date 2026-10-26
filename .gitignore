@@ -21,3 +21,7 @@ task/environment/data/examples/*/structures/
 *_private.md
 # my pipeline pipeline notes: list per-protein member counts (answer values) -> local only
 pipeline_README.md
+
+# subset/small-protein selection: public PDB inputs and my pipeline-derived per-copy sets (local only)
+gen/subset/small/
+gen/subset/*.json
