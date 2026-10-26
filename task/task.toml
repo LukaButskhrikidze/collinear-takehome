@@ -21,7 +21,7 @@ timeout_sec = 3600.0
 # Agent phase only: model API reachable, nothing else (no RCSB/SIFTS/UniProt lookups).
 # Setup (opencode install) runs before this switch, on the public baseline below.
 network_mode = "allowlist"
-allowed_hosts = ["openrouter.ai", "models.dev"]
+allowed_hosts = ["openrouter.ai", "models.dev", "api.anthropic.com"]
 
 [environment]
 build_timeout_sec = 1200.0
