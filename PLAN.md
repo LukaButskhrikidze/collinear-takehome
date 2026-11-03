@@ -31,7 +31,7 @@ ensemble and report two numbers:
 
 ## 2. Ground truth
 
-- Answer key = my pipeline (SIFTS + numbering audit). Same environment as hers:
+- Answer key = my pipeline (SIFTS + numbering audit). Same environment as the pipeline's:
   Python 3.9, gemmi 0.7.5, numpy 2.0.2, scipy 1.13.1, PyYAML 6.0.3.
 - Independent cross-check = `task/solution/reference.py` (my code, same packages,
   sequence alignment to UniProt instead of SIFTS).
@@ -106,21 +106,21 @@ coordinates; **62,681 chars ≈ 15.7k tokens** — fits Astra and Hy4.
 
 ## 8. Open issues — decide before freezing
 
-1. ~~my pipeline's core definition~~ — **resolved.** Her code and README agree (core over aligned
+1. ~~The pipeline's core definition~~ — **resolved.** The code and README agree (core over aligned
    members). The on-disk sidecars of P07550 and P16304 are **stale**: written by an older
    code version ("flagged numbering" members, a rule no longer in the code) and never
    rewritten because of her fingerprint skip. Keys now come from her *current* code run in
-   memory (`gen/pipeline_recompute.py`), not from sidecars. Worth telling my pipeline.
+   memory (`gen/pipeline_recompute.py`), not from sidecars.
 2. **Regeneration:** align stage finished 2026-10-22 21:08, no jobs running; TM-scores
    not recomputed (not needed for this task).
 3. **Two GT judgement calls found** (good report material):
-   - 8pvw (adenylate kinase with the LID domain replaced): my pipeline numbers the junction Gly
+   - 8pvw (adenylate kinase with the LID domain replaced): the pipeline numbers the junction Gly
      as UniProt 151; the reference calls it non-native → core differs by 1.
    - P07550: SIFTS segments stop earlier than the sequence match at fusion junctions
      and C-termini (5d6l, 7dhr, 8gej …) → core differs by 9.
 4. **More items needed:** pilot is 2 + 2. Target ~6 + 6, chosen by
    `gen/pipeline_key.py` + `gen/fetch_from_pipeline.sh`; boundary = construct-heavy (GPCR fusions,
-   MBP fusions, polyprotein numbering); keep only proteins where my pipeline and the reference
+   MBP fusions, polyprotein numbering); keep only proteins where the pipeline and the reference
    agree within the floor.
 5. **Network allow-list** is enforced by Harbor's egress sidecar; confirm in the smoke run
    that opencode starts and that `curl https://www.rcsb.org` fails inside the agent phase.

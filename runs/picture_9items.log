@@ -1,0 +1,20 @@
+  1/1 Mean: 0.767 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:09:38 0:00:00
+adhoc • opencode • openai/gpt-6-astra
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.767 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━━━┳━━━━━━━┓
+┃ Reward   ┃ Count ┃
+┡━━━━━━━━━━╇━━━━━━━┩
+│ 0.766667 │     1 │
+└──────────┴───────┘
+
+Job Info
+Total runtime: 9m 38s
+Results written to runs/picture_9items/result.json
+Inspect results by running `harbor view runs`
+Share results by running `harbor upload runs/picture_9items`
+

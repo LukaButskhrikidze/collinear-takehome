@@ -1,0 +1,33 @@
+  2/2 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:43:52 0:00:00
+adhoc • opencode • openai/gpt-6-astra
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.833 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━━━┳━━━━━━━┓
+┃ Reward   ┃ Count ┃
+┡━━━━━━━━━━╇━━━━━━━┩
+│ 0.833333 │     1 │
+└──────────┴───────┘
+
+adhoc • opencode • tencent/hy4-preview
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 43m 52s
+Results written to runs/dyn_smoke/result.json
+Inspect results by running `harbor view runs`
+Share results by running `harbor upload runs/dyn_smoke`
+

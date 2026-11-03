@@ -1,14 +1,14 @@
 """Per-entry comparison for choosing item subsets (generator side, never shipped).
 
-    python3 compare.py <proteins_dir> <ana_copies.json> <out.json> [ACC ...]
+    python3 compare.py <proteins_dir> <pipeline_copies.json> <out.json> [ACC ...]
 
 For every entry of every protein, three views of the copies (UniProt residue sets):
-  ana        my pipeline (SIFTS + numbering audit), from gen/subset/pipeline_copies.py
+  pipeline        my pipeline (SIFTS + numbering audit), from gen/subset/pipeline_copies.py
   reference  task/solution/reference.py (sequence alignment to UniProt)
   depositor  the entry's own mapping: _struct_ref_seq rows for this UniProt accession map author residue
              numbers onto UniProt positions; residues outside those rows are dropped (what an agent gets by
              trusting the file's metadata, as Astra did with 5n2r)
-An entry is "clean" when ana and reference agree copy for copy, and a "trap" when depositor differs from them.
+An entry is "clean" when pipeline and reference agree copy for copy, and a "trap" when depositor differs from them.
 """
 import json
 import sys
@@ -67,14 +67,14 @@ def counts(members):
     return {"n_members": len(aligned), "n_core": len(core)}
 
 
-def main(proteins_dir, ana_json, out_json, *accs):
-    ana = json.load(open(ana_json))
+def main(proteins_dir, pipeline_json, out_json, *accs):
+    pipeline = json.load(open(pipeline_json))
     out = {}
-    for acc in accs or sorted(ana):
+    for acc in accs or sorted(pipeline):
         folder = Path(proteins_dir) / acc
         uni = R.read_fasta(folder / "uniprot.fasta")
         by_pdb = {}
-        for c in ana[acc]:
+        for c in pipeline[acc]:
             by_pdb.setdefault(c["pdb"].lower(), []).append(sorted(c["res"]))
         entries = []
         for cif in sorted((folder / "structures").glob("*.cif*")):
@@ -84,7 +84,7 @@ def main(proteins_dir, ana_json, out_json, *accs):
             an = sorted(by_pdb.get(pdb, []))
             entries.append({"pdb": pdb, "n_ana": len(an), "n_ref": len(ref), "n_dep": len(dep),
                             "clean": an == ref, "trap": dep != ref,
-                            "ana": an, "ref": ref, "dep": dep})
+                            "pipeline": an, "ref": ref, "dep": dep})
         out[acc] = entries
         n_clean = sum(e["clean"] for e in entries)
         n_trap = sum(e["trap"] and e["clean"] for e in entries)

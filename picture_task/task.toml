@@ -1,0 +1,38 @@
+schema_version = "1.1"
+
+[task]
+name = "butskhl/protein-picture"
+description = "Identify what kind of protein an experimental ensemble picture shows; answer fixed-choice questions checked against UniProt."
+authors = []
+keywords = ["protein-structure", "image", "uniprot"]
+
+[metadata]
+author_name = "Luka Butskhrikidze"
+author_email = "luka.butskhrikidze@vanderbilt.edu"
+difficulty = "hard"
+category = "structural-biology"
+tags = ["protein-structure", "image", "uniprot"]
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 3600.0
+# Agent phase only: model API reachable, nothing else (no UniProt/PDB/web lookups).
+# Setup (opencode install) runs before this switch, on the public baseline below.
+network_mode = "allowlist"
+allowed_hosts = ["openrouter.ai", "models.dev", "api.anthropic.com"]
+
+[environment]
+build_timeout_sec = 1200.0
+cpus = 3
+memory_mb = 6144
+storage_mb = 10240
+gpus = 0
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

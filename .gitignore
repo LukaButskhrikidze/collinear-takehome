@@ -12,6 +12,8 @@ gen/data_card.csv
 # Harbor job folders: verifier/metrics.json holds true values; agent logs may hold secrets
 runs/*/
 !runs/no_tools/
+# no-tools run folders: metrics.json holds the true values and a perfect answers.csv reproduces them
+runs/no_tools/*/
 
 # Input structures: public PDB files, re-fetched with gen/fetch_from_pipeline.sh
 task/environment/data/proteins/
@@ -19,9 +21,28 @@ task/environment/data/examples/*/structures/
 
 # local-only notes with answer values
 *_private.md
-# my pipeline pipeline notes: list per-protein member counts (answer values) -> local only
+# Pipeline notes: list per-protein member counts (answer values) -> local only
 pipeline_README.md
 
-# subset/small-protein selection: public PDB inputs and my pipeline-derived per-copy sets (local only)
+# baseline tables: reference.csv is the answer key (it scores 1.000) and naive.csv is exact in-regime
+gen/subset/*.csv
+
+# subset/small-protein selection: public PDB inputs and pipeline-derived per-copy sets (local only)
 gen/subset/small/
 gen/subset/*.json
+
+# picture task: answer key (tests/truth.json) and the placeholder oracle's copy of it
+picture_task/tests/truth.json
+picture_task/solution/answers.json
+# picture task generator side: screenshots named by protein and the item -> protein map reveal the key
+gen/picture/screens/
+gen/picture/views/
+gen/picture/item_map.json
+gen/picture/candidates_*.json
+gen/transport/transporters.tsv
+gen/probe/
+picture_pglk/tests/truth.json
+picture_pglk/solution/answers.json
+gen/dyn/
+dyn_task/tests/truth.json
+dyn_task/solution/answers.json

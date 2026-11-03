@@ -1,0 +1,197 @@
+{
+  "task": "experimental-ensemble-size-and-core (v2, frozen 7bdbebe 2026-10-25)",
+  "baselines_per_subset": {
+    "null": {
+      "reward": 0.1547,
+      "across_boundary": 0.1285,
+      "in_regime": 0.2005
+    },
+    "cheap_tool_naive": {
+      "reward": 0.4771,
+      "across_boundary": 0.1784,
+      "in_regime": 1.0
+    },
+    "best_shortcut_depositor": {
+      "reward": 0.7122,
+      "across_boundary": 0.5478,
+      "in_regime": 1.0
+    },
+    "reference": {
+      "reward": 1.0,
+      "across_boundary": 1.0,
+      "in_regime": 1.0
+    }
+  },
+  "models": {
+    "gpt-6-astra (max)": {
+      "agentic": {
+        "n_trials": 3,
+        "outcomes": {
+          "scored": 3,
+          "malformed": 0,
+          "timeout": 0,
+          "truncated": 0,
+          "refused": 0,
+          "content_filtered": 0,
+          "provider_error": 0
+        },
+        "cost_usd": 10.37,
+        "reward": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "in_regime": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "across_boundary": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "no_tools": {
+        "runs": [
+          {
+            "run": "gpt-6-astra_1",
+            "outcome": "scored",
+            "reward": 1.0,
+            "per_subset": {
+              "across_boundary": 1.0,
+              "in_regime": 1.0
+            },
+            "finish": "stop",
+            "error": null,
+            "cost_usd": 1.180685
+          },
+          {
+            "run": "gpt-6-astra_2",
+            "outcome": "scored",
+            "reward": 1.0,
+            "per_subset": {
+              "across_boundary": 1.0,
+              "in_regime": 1.0
+            },
+            "finish": "stop",
+            "error": null,
+            "cost_usd": 1.265885
+          },
+          {
+            "run": "gpt-6-astra_3",
+            "outcome": "scored",
+            "reward": 1.0,
+            "per_subset": {
+              "across_boundary": 1.0,
+              "in_regime": 1.0
+            },
+            "finish": "stop",
+            "error": null,
+            "cost_usd": 1.6583175
+          }
+        ],
+        "scored_mean": 1.0,
+        "scored_sd": 0.0
+      }
+    },
+    "hy4-preview": {
+      "agentic": {
+        "n_trials": 5,
+        "outcomes": {
+          "scored": 4,
+          "malformed": 0,
+          "timeout": 0,
+          "truncated": 0,
+          "refused": 0,
+          "content_filtered": 0,
+          "provider_error": 1
+        },
+        "cost_usd": 4.36,
+        "reward": {
+          "mean": 0.982,
+          "sd": 0.037,
+          "min": 0.926,
+          "max": 1.0
+        },
+        "in_regime": {
+          "mean": 1.0,
+          "sd": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "across_boundary": {
+          "mean": 0.971,
+          "sd": 0.058,
+          "min": 0.884,
+          "max": 1.0
+        }
+      },
+      "no_tools": {
+        "runs": [
+          {
+            "run": "hy4-preview_1",
+            "outcome": "provider_error",
+            "reward": null,
+            "per_subset": null,
+            "finish": "error",
+            "error": {
+              "code": 502,
+              "message": "JSON error injected into SSE stream",
+              "metadata": {
+                "error_type": "provider_unavailable"
+              }
+            },
+            "cost_usd": 0
+          },
+          {
+            "run": "hy4-preview_2",
+            "outcome": "scored",
+            "reward": 0.591,
+            "per_subset": {
+              "across_boundary": 0.5,
+              "in_regime": 0.75
+            },
+            "finish": "stop",
+            "error": null,
+            "cost_usd": 0.13458945
+          },
+          {
+            "run": "hy4-preview_3",
+            "outcome": "scored",
+            "reward": 0.838,
+            "per_subset": {
+              "across_boundary": 0.745,
+              "in_regime": 1.0
+            },
+            "finish": "stop",
+            "error": null,
+            "cost_usd": 0.158408974
+          },
+          {
+            "run": "hy4-preview_4",
+            "outcome": "scored",
+            "reward": 0.397,
+            "per_subset": {
+              "across_boundary": 0.481,
+              "in_regime": 0.25
+            },
+            "finish": "stop",
+            "error": null,
+            "cost_usd": 0.095347853
+          }
+        ],
+        "scored_mean": 0.609,
+        "scored_sd": 0.221
+      }
+    }
+  },
+  "target": {
+    "astra_below": 0.6,
+    "hy4_below": 0.3
+  },
+  "total_spend_usd": 61.84
+}

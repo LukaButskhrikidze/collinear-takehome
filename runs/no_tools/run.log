@@ -1,0 +1,7 @@
+hy4-preview_1: reward 0.000000, finish error, cost 0, 415.9 s
+gpt-6-astra_1: reward 1.000000, finish stop, cost 1.180685, 443.2 s
+gpt-6-astra_2: reward 1.000000, finish stop, cost 1.265885, 447.9 s
+gpt-6-astra_3: reward 1.000000, finish stop, cost 1.6583175, 401.1 s
+hy4-preview_2: reward 0.000000, finish stop, cost 0.13458945, 555.9 s
+hy4-preview_3: reward 0.000000, finish stop, cost 0.158408974, 369.6 s
+hy4-preview_4: reward 0.396816, finish stop, cost 0.095347853, 724.9 s

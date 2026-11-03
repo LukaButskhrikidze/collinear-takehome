@@ -1,0 +1,29 @@
+# harbor run -c jobs/picture_pglk.yaml   (Astra only; PglK superposed ensemble picture)   (1 attempt per model; brief Appendix B agents block, n_attempts 1)
+job_name: picture_pglk
+jobs_dir: runs
+n_attempts: 1
+# colima VM has 4 CPUs / 8 GB; each trial needs 3 CPUs / 6 GB -> one trial at a time
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+environment:
+  type: docker
+  force_build: true
+  delete: true
+agents:
+  - name: opencode
+    model_name: "openrouter/openai/gpt-6-astra"
+    override_setup_timeout_sec: 900
+    kwargs:
+      version: "1.18.31"
+      opencode_config:
+        small_model: "openrouter/openai/gpt-6-astra"
+        provider:
+          openrouter:
+            models:
+              "openai/gpt-6-astra":
+                options:
+                  reasoning:
+                    effort: max
+tasks:
+  - path: picture_pglk

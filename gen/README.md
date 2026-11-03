@@ -6,7 +6,7 @@ Read-only on my pipeline's data (on the pipeline host). No SLURM job is started 
    members, unaligned, core (sidecar vs per-chain traces) and raw size.
 2. **Copy inputs:** `gen/fetch_from_pipeline.sh task/environment/data/proteins ACC …`
    copies the exact raw mmCIFs + UniProt FASTA my pipeline used.
-3. **Answer keys:** recompute with my pipeline after her regeneration; write
+3. **Answer keys:** recompute with my pipeline after its regeneration; write
    `gen/pipeline_keys_<set>.tsv` (protein_id, subset, n_members, n_core, note).
 4. **Shortcuts:** `task/baseline/null.py`, `task/baseline/naive.py` on the same folders.
 5. **Truth + data card:** `python gen/make_truth.py gen/pipeline_keys_<set>.tsv null.csv naive.csv`

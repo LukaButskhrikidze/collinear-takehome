@@ -39,7 +39,7 @@ baselines:              # task/baseline/ ; rewards measured 2026-10-25 before an
 truth:
   source: my pipeline — SIFTS mapping, numbering audit, same pinned rules
   core_definition: aligned members only (README and code agree)
-  how: gen/subset/pipeline_subset.py runs her current code in memory on exactly the shipped entries
+  how: gen/subset/pipeline_subset.py runs the pipeline's current code in memory on exactly the shipped entries
     (on-disk sidecars can be stale: older code, fingerprint skip)
   cross_check: reference.py equals the key on all 11 proteins (members and core)
   entry_selection: only "clean" entries ship — my pipeline's per-copy UniProt residue sets (SIFTS + numbering audit)

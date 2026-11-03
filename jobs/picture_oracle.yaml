@@ -1,0 +1,16 @@
+# harbor run -c jobs/picture_oracle.yaml   (free: copies the pilot key, checks the wiring)
+job_name: picture_oracle
+jobs_dir: runs
+n_attempts: 1
+# colima VM has 4 CPUs / 8 GB; each trial needs 3 CPUs / 6 GB -> one trial at a time
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+environment:
+  type: docker
+  force_build: true
+  delete: true
+agents:
+  - name: oracle
+tasks:
+  - path: picture_task

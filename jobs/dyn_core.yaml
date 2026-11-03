@@ -1,0 +1,36 @@
+# harbor run -c jobs/dyn_core.yaml   (motion-fingerprint v2: positions relative to the resolved core; 1 Astra + 1 Hy4 trial)
+job_name: dyn_core
+jobs_dir: runs
+n_attempts: 1
+# colima VM has 4 CPUs / 8 GB; each trial needs 3 CPUs / 6 GB -> one trial at a time
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+environment:
+  type: docker
+  force_build: true
+  delete: true
+agents:
+  - name: opencode
+    model_name: "openrouter/openai/gpt-6-astra"
+    override_setup_timeout_sec: 900
+    kwargs:
+      version: "1.18.31"
+      opencode_config:
+        small_model: "openrouter/openai/gpt-6-astra"
+        provider:
+          openrouter:
+            models:
+              "openai/gpt-6-astra":
+                options:
+                  reasoning:
+                    effort: max
+  - name: opencode
+    model_name: "openrouter/tencent/hy4-preview"
+    override_setup_timeout_sec: 900
+    kwargs:
+      version: "1.18.31"
+      opencode_config:
+        small_model: "openrouter/tencent/hy4-preview"
+tasks:
+  - path: dyn_task

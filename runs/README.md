@@ -21,7 +21,8 @@ for every trial), plus `trials.csv`, `baselines.json` and `no_tools/`.
 
 **failure_class** (scored trials that lost reward, brief 2.2.5):
 `construct` (wrong biology: kept fusion/tag/partner residues, author numbering, dropped
-mutants, …), `harness` (environment/tool problem), `format` (answer shape). Only
+mutants, …), `harness` (environment/tool problem), `format` (answer shape), `bookkeeping` (no-tools
+only: interval/set arithmetic done by hand went wrong, in-regime items included, so not the named biology). Only
 `construct` losses count toward the target; fix harness/format causes and rerun.
 
 **Validity check:** if non-scored trials are more than a third of all trials, the

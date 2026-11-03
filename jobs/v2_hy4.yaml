@@ -1,0 +1,22 @@
+# harbor run -c jobs/v2_hy4.yaml   (Hy4 only, task v2: 11 proteins; Appendix B agents block)
+job_name: v2_hy4
+jobs_dir: runs
+n_attempts: 1
+# colima VM has 4 CPUs / 8 GB; each trial needs 3 CPUs / 6 GB -> one trial at a time
+n_concurrent_trials: 1
+retry:
+  max_retries: 0
+environment:
+  type: docker
+  force_build: true
+  delete: true
+agents:
+  - name: opencode
+    model_name: "openrouter/tencent/hy4-preview"
+    override_setup_timeout_sec: 900
+    kwargs:
+      version: "1.18.31"
+      opencode_config:
+        small_model: "openrouter/tencent/hy4-preview"
+tasks:
+  - path: task

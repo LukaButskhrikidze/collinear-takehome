@@ -1,10 +1,13 @@
 """Recompute members/core with my pipeline's CURRENT code, in memory only (writes nothing)."""
-import json, sys
+import importlib, json, os, sys
 from pathlib import Path
-from pipeline_pkg.catalog.schema import load_catalog
-from pipeline_pkg.ensemble.entity import load_ensemble_entities
-from pipeline_pkg.ensemble.filter import filter_entities
-from pipeline_pkg.ensemble.align import align_filtered, AlignSkip
+
+P = os.environ["PIPELINE_PKG"]   # my pipeline's Python package, importable in its own venv
+load_catalog = importlib.import_module(f"{P}.catalog.schema").load_catalog
+load_ensemble_entities = importlib.import_module(f"{P}.ensemble.entity").load_ensemble_entities
+filter_entities = importlib.import_module(f"{P}.ensemble.filter").filter_entities
+_align = importlib.import_module(f"{P}.ensemble.align")
+align_filtered, AlignSkip = _align.align_filtered, _align.AlignSkip
 
 root = Path(sys.argv[1])
 cat = load_catalog(root)
